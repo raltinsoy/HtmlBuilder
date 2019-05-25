@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.489
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HtmlTableBuilder", "HtmlTableBuilder\HtmlTableBuilder.csproj", "{F040B0FB-61B5-47BE-B1C0-A9879EEF371A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HtmlBuilder", "HtmlBuilder\HtmlBuilder.csproj", "{F040B0FB-61B5-47BE-B1C0-A9879EEF371A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HtmlTableBuilder.Test", "HtmlTableBuilder.Test\HtmlTableBuilder.Test.csproj", "{C88EF7BD-DD17-4F41-ACBF-3BAFBB7C67F7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HtmlBuilder.Test", "HtmlBuilder.Test\HtmlBuilder.Test.csproj", "{C88EF7BD-DD17-4F41-ACBF-3BAFBB7C67F7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
