@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HtmlBuilder.Style;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,53 +9,28 @@ namespace HtmlBuilder
 {
     public class Builder
     {
-        private List<Table> _tables;
+        private List<IHtmlContent> _contents;
 
-        public IEnumerable<Table> Tables => _tables;
+        public IEnumerable<IHtmlContent> Contents => _contents;
 
-        public Builder()
+        //TODO: missing serialize
+        public TableStyle TableStyle { get; }
+
+        public Builder(TableStyle tableStyle = null)
         {
-            _tables = new List<Table>();
+            _contents = new List<IHtmlContent>();
+
+            TableStyle = tableStyle;
         }
 
-        internal void AddTable(Table table)
+        public void AddTableInner(Table table)
         {
-            _tables.Add(table);
+            _contents.Add(table);
         }
 
         public static Builder Create()
         {
             return new Builder();
-        }
-    }
-
-    public static class BuilderExtensions
-    {
-        public static string SerializeToString(this Builder build)
-        {
-            StringBuilder stringBuilder = new StringBuilder();
-
-            foreach (var table in build.Tables)
-            {
-                stringBuilder.Append("<table>");
-
-                foreach (var tr in table.Trs)
-                {
-                    stringBuilder.Append("<tr>");
-
-                    foreach (var th in tr.TrChild)
-                    {
-                        stringBuilder.Append("<th>");
-                        stringBuilder.Append(th.Content);
-                        stringBuilder.Append("</th>");
-                    }
-
-                    stringBuilder.Append("</tr>");
-                }
-
-                stringBuilder.Append("</table>");
-            }
-            return stringBuilder.ToString();
         }
     }
 }

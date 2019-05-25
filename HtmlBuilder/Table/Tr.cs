@@ -17,6 +17,11 @@ namespace HtmlBuilder
             _trChild = new List<IChildOfTr>();
         }
 
+        public Tr(IEnumerable<IChildOfTr> childOfTrs)
+        {
+            _trChild = new List<IChildOfTr>(childOfTrs);
+        }
+
         internal void AddChildInner(IChildOfTr th)
         {
             _trChild.Add(th);

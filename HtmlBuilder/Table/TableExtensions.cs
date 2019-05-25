@@ -10,7 +10,7 @@ namespace HtmlBuilder
     {
         public static Builder AddTable(this Builder builder, Table table)
         {
-            builder.AddTable(table);
+            builder.AddTableInner(table);
             return builder;
         }
 

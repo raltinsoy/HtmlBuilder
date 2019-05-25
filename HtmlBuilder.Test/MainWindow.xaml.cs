@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using HtmlBuilder.Style;
 
 namespace HtmlBuilder.Test
 {
@@ -24,11 +25,22 @@ namespace HtmlBuilder.Test
         {
             InitializeComponent();
 
+            var tableStyle = new TableStyle()
+            {
+                Width = "100%",
+                BackgroundColor = "gray",
+                Border = "1px solid red"
+            };
+
             var testBuilder = Builder.Create().AddTable(
-                new Table()
+                new Table(tableStyle: tableStyle)
                     .AddTr(new Tr()
-                        .AddChildToTr(new Td("Td1"))
-                        .AddChildToTr(new Th("Th1"))
+                        .AddChildToTr(new Th("Row1.Col1"))
+                        .AddChildToTr(new Th("Row1.Col2"))
+                    )
+                    .AddTr(new Tr()
+                        .AddChildToTr(new Td("Row2.Col1"))
+                        .AddChildToTr(new Td("Row2.Col2"))
                     )
                 ).SerializeToString();
 
