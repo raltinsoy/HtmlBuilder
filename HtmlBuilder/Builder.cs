@@ -4,20 +4,22 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HtmlTableBuilder
+namespace HtmlBuilder
 {
     public class Builder
     {
-        public List<Tr> Trs { get; }
+        private List<Table> _tables;
+
+        public IEnumerable<Table> Tables => _tables;
 
         public Builder()
         {
-            Trs = new List<Tr>();
+            _tables = new List<Table>();
         }
 
-        public void AddTrToTable(Tr tr)
+        internal void AddTable(Table table)
         {
-            Trs.Add(tr);
+            _tables.Add(table);
         }
 
         public static Builder Create()
@@ -31,76 +33,28 @@ namespace HtmlTableBuilder
         public static string SerializeToString(this Builder build)
         {
             StringBuilder stringBuilder = new StringBuilder();
-            stringBuilder.Append("<table>");
 
-            foreach (var tr in build.Trs)
+            foreach (var table in build.Tables)
             {
-                stringBuilder.Append("<tr>");
+                stringBuilder.Append("<table>");
 
-                foreach (var th in tr.TrChild)
+                foreach (var tr in table.Trs)
                 {
-                    stringBuilder.Append("<th>");
-                    stringBuilder.Append(th.Content);
-                    stringBuilder.Append("</th>");
+                    stringBuilder.Append("<tr>");
+
+                    foreach (var th in tr.TrChild)
+                    {
+                        stringBuilder.Append("<th>");
+                        stringBuilder.Append(th.Content);
+                        stringBuilder.Append("</th>");
+                    }
+
+                    stringBuilder.Append("</tr>");
                 }
 
-                stringBuilder.Append("</tr>");
+                stringBuilder.Append("</table>");
             }
-
-            stringBuilder.Append("</table>");
             return stringBuilder.ToString();
         }
-
-        public static Builder AddTr(this Builder builder, Tr tr)
-        {
-            builder.AddTrToTable(tr);
-            return builder;
-        }
-
-        public static Tr AddChildToTr(this Tr tr, IInsideTr childTr)
-        {
-            tr.AddToTr(childTr);
-            return tr;
-        }
-    }
-
-    public class Tr
-    {
-        public List<IInsideTr> TrChild { get; }
-
-        public Tr()
-        {
-            TrChild = new List<IInsideTr>();
-        }
-
-        public void AddToTr(IInsideTr th)
-        {
-            TrChild.Add(th);
-        }
-    }
-
-    public class Th : IInsideTr
-    {
-        public string Content { get; }
-
-        public Th(string content)
-        {
-            Content = content;
-        }
-    }
-
-    public class Td : IInsideTr
-    {
-        public string Content { get; }
-
-        public Td(string content)
-        {
-            Content = content;
-        }
-    }
-
-    public interface IInsideTr
-    {
-        string Content { get; }
     }
 }

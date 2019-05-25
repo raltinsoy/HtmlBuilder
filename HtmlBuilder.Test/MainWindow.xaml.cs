@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace HtmlTableBuilder.Test
+namespace HtmlBuilder.Test
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
@@ -24,25 +24,14 @@ namespace HtmlTableBuilder.Test
         {
             InitializeComponent();
 
-            var testBuilder = Builder.Create()
-                 .AddTr(new Tr()
-                     .AddChildToTr(
-                         new Th("Th1")
-                     )
-                     .AddChildToTr(
-                         new Th("Th2")
-                     )
-                 )
-                 .AddTr(new Tr()
-                    .AddChildToTr(
-                        new Td("Td1")
-                     )
-                     .AddChildToTr(
-                        new Td("Td2")
-                     )
-                 )
-                 .SerializeToString();
-            
+            var testBuilder = Builder.Create().AddTable(
+                new Table()
+                    .AddTr(new Tr()
+                        .AddChildToTr(new Td("Td1"))
+                        .AddChildToTr(new Th("Th1"))
+                    )
+                ).SerializeToString();
+
         }
     }
 }
