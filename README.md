@@ -1,6 +1,6 @@
 # Html Builder
 
-Examle
+Examle usage
 
 ```c#
 var tableStyle = new TableStyle()
@@ -10,15 +10,36 @@ var tableStyle = new TableStyle()
         Border = "1px solid red"
     };
 
-var testBuilder = Builder.Create().AddTable(
-    new Table(tableStyle: tableStyle)
-        .AddTr(new Tr()
-            .AddChildToTr(new Th("Row1.Col1"))
-            .AddChildToTr(new Th("Row1.Col2"))
-        )
-        .AddTr(new Tr()
-            .AddChildToTr(new Td("Row2.Col1"))
-            .AddChildToTr(new Td("Row2.Col2"))
-        )
-    ).SerializeToString();
+ var testBuilder = Builder.Create().AddTable(
+                new Table(tableStyle: tableStyle)
+                    .AddTr(new Tr()
+                        .AddChild(new Th("First Name"))
+                        .AddChild(new Th("Last Name"))
+                    )
+                    .AddTr(new Tr()
+                        .AddChild(new Td("Peter"))
+                        .AddChild(new Td("White"))
+                    )
+                ).SerializeToString();
+```
+
+```c#
+var testBuilder = Builder.Create()
+                .AddTable(x => x.AddTr(y => y
+                                            .AddChild(new Td("Id"))
+                                            .AddTd("Fisrt Name")
+                                            .AddTd(new Td("Last Name"))
+                                       )
+                                .AddTr(y => y
+                                            .AddChild(new Th("1"))
+                                            .AddTh("Peter")
+                                            .AddTh(new Th("White"))
+                                       )
+                                .AddTr(y => y
+                                            .AddChild(new Th("2"))
+                                            .AddTh("Bob")
+                                            .AddTh(new Th("Marley"))
+                                       )
+                          )
+                .SerializeToString();
 ```
