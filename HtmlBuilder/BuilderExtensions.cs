@@ -10,13 +10,37 @@ namespace HtmlBuilder
     {
         public static string SerializeToString(this Builder build)
         {
-            StringBuilder stringBuilder = new StringBuilder();
-
-            foreach (var content in build.Contents)
+            //TODO: think better solution
+            if (build.WithHtmlTag)
             {
-                stringBuilder.Append(content.SerializeToString());
+                StringBuilder stringBuilder = new StringBuilder("<html><head>");
+
+                if (!string.IsNullOrEmpty(build.HeadStyle))
+                {
+                    stringBuilder.Append("<style>" +
+                                         $"{build.HeadStyle}" +
+                                         "</style>");
+                }
+
+                stringBuilder.Append("</head><body>");
+
+                foreach (var content in build.Contents)
+                {
+                    stringBuilder.Append(content.SerializeToString());
+                }
+
+                stringBuilder.Append("</body></html>");
+                return stringBuilder.ToString();
             }
-            return stringBuilder.ToString();
+            else
+            {
+                StringBuilder stringBuilder = new StringBuilder();
+                foreach (var content in build.Contents)
+                {
+                    stringBuilder.Append(content.SerializeToString());
+                }
+                return stringBuilder.ToString();
+            }
         }
     }
 }

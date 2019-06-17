@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace HtmlBuilder
 {
-    public class Table : IHtmlContent
+    public class Table : IHtmlContent, IChildOfTr
     {
         private List<Tr> _trs { get; }
 
@@ -57,7 +57,7 @@ namespace HtmlBuilder
                 foreach (var th in tr.TrChild)
                 {
                     stringBuilder.Append("<th>");
-                    stringBuilder.Append(th.Content);
+                    stringBuilder.Append(th.SerializeToString());
                     stringBuilder.Append("</th>");
                 }
 

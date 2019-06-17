@@ -13,14 +13,16 @@ namespace HtmlBuilder
 
         public IEnumerable<IHtmlContent> Contents => _contents;
 
-        //TODO: missing serialize
-        public TableStyle TableStyle { get; }
+        //TODO: change type from string to generic type
+        public string HeadStyle { get; }
 
-        public Builder(TableStyle tableStyle = null)
+        public bool WithHtmlTag { get; set; }
+
+        public Builder(string headStyle = null)
         {
             _contents = new List<IHtmlContent>();
-
-            TableStyle = tableStyle;
+            
+            HeadStyle = headStyle;
         }
 
         public void AddTableInner(Table table)
@@ -28,9 +30,9 @@ namespace HtmlBuilder
             _contents.Add(table);
         }
 
-        public static Builder Create()
+        public static Builder Create(string headStyle = null)
         {
-            return new Builder();
+            return new Builder(headStyle);
         }
     }
 }

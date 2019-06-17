@@ -9,6 +9,12 @@ namespace HtmlBuilder
 {
     public static class TableExtensions
     {
+        public static Builder WithHtmlTag(this Builder builder)
+        {
+            builder.WithHtmlTag = true;
+            return builder;
+        }
+
         public static Builder AddTable(this Builder builder, Func<Table, Table> func)
         {
             var table = func.Invoke(new Table());
@@ -74,6 +80,12 @@ namespace HtmlBuilder
         public static Tr AddTh(this Tr tr, string content)
         {
             tr.AddChildInner(new Th(content));
+            return tr;
+        }
+
+        public static Tr AddTable(this Tr tr, Table table)
+        {
+            tr.AddChildInner(table);
             return tr;
         }
     }

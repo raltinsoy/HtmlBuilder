@@ -84,5 +84,68 @@ namespace HtmlBuilder.Test
 
             Assert.Equal(expected, testBuilder);
         }
+
+        [Fact]
+        public void TableInnerTableTest1()
+        {
+            string headStyle = "table, th, td { border: 1px solid black;" +
+                                    "border-collapse: collapse; }";
+
+            var testBuilder = Builder.Create(headStyle).AddTable(
+                new Table()
+                    .AddTr(new Tr()
+                        .AddChild(new Th("First Name"))
+                        .AddChild(new Th("Table1"))
+                    )
+                    .AddTr(new Tr()
+                        .AddChild(new Td("Peter"))
+                        .AddTable(new Table()
+                            .AddTr(new Tr()
+                                .AddTd("Row1.Td1")
+                                .AddTd("Row1.Td2")
+                            )
+                            .AddTr(new Tr()
+                                .AddTd("Row2.Td1")
+                                .AddTd("Row2.Td2")
+                            )
+                        )
+                    )
+                )
+                .WithHtmlTag()
+                .SerializeToString();
+
+            var expected = "<html>" +
+                               "<head>" +
+                                   "<style>" +
+                                   "table, th, td { border: 1px solid black;border-collapse: collapse; }" +
+                                   "</style>" +
+                               "</head>" +
+                               "<body>" +
+                                   "<table>" +
+                                   "<tr>" +
+                                       "<th>First Name</th>" +
+                                       "<th>Table1</th>" +
+                                   "</tr>" +
+                                   "<tr>" +
+                                       "<th>Peter</th>" +
+                                       "<th>" +
+                                           "<table>" +
+                                               "<tr>" +
+                                                   "<th>Row1.Td1</th>" +
+                                                   "<th>Row1.Td2</th>" +
+                                               "</tr>" +
+                                               "<tr>" +
+                                                   "<th>Row2.Td1</th>" +
+                                                   "<th>Row2.Td2</th>" +
+                                               "</tr>" +
+                                           "</table>" +
+                                       "</th>" +
+                                   "</tr>" +
+                                   "</table>" +
+                               "</body>" +
+                           "</html>";
+
+            Assert.Equal(expected, testBuilder);
+        }
     }
 }

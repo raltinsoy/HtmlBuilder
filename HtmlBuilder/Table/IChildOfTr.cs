@@ -8,6 +8,6 @@ namespace HtmlBuilder
 {
     public interface IChildOfTr
     {
-        string Content { get; }
+        string SerializeToString();
     }
 }

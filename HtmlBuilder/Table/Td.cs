@@ -14,5 +14,10 @@ namespace HtmlBuilder
         {
             Content = content;
         }
+
+        public string SerializeToString()
+        {
+            return Content;
+        }
     }
 }
