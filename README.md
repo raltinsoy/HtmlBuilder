@@ -1,6 +1,6 @@
 # Html Builder
 
-[![Build Status](https://img.shields.io/appveyor/ci/USERNAME/REPOSITORIO/master.svg)](https://ci.appveyor.com/project/raltinsoy/htmlbuilder)
+[![Build status](https://ci.appveyor.com/api/projects/status/xwx68c63k8xlhejx?svg=true)](https://ci.appveyor.com/project/raltinsoy/htmlbuilder)
 
 Examle usage
 
